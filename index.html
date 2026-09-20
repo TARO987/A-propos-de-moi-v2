@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>À propos de moi</title>
+<link rel="icon" type="image/png" href="8.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Technicien Supérieur en Réseaux Informatiques et Télécommunications — infrastructures IT, support technique et solutions sur mesure.">
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg2:#111827;
+    --card:#131c2e;
+    --accent:#38bdf8;
+    --accent2:#818cf8;
+    --text:#e2e8f0;
+    --muted:#8b9bb4;
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:none}
+
+  /* ===== PRELOADER ===== */
+  #preloader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity .6s,visibility .6s}
+  #preloader.hidden{opacity:0;visibility:hidden}
+  .loader-ring{width:70px;height:70px;border:4px solid rgba(56,189,248,.15);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #preloader p{color:var(--muted);letter-spacing:4px;font-size:.85rem;animation:pulse 1.2s ease infinite}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+  /* ===== SCROLL PROGRESS BAR ===== */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:1001;box-shadow:0 0 12px var(--accent)}
+
+  /* ===== CUSTOM CURSOR GLOW ===== */
+  #cursor-glow{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.07),transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s}
+
+  /* ===== PARTICLE CANVAS ===== */
+  #particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+  /* ===== NAV ===== */
+  header{position:fixed;top:0;width:100%;background:rgba(10,14,26,.75);backdrop-filter:blur(14px);z-index:100;border-bottom:1px solid rgba(56,189,248,.12);transition:.3s}
+  header.scrolled{box-shadow:0 10px 40px rgba(0,0,0,.5)}
+  nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.5rem;transition:.3s}
+  header.scrolled nav{padding:.7rem 1.5rem}
+  .logo{font-weight:700;font-size:1.25rem;color:var(--text);position:relative}
+  .logo span{color:var(--accent)}
+  .logo::after{content:"";position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s}
+  .logo:hover::after{width:100%}
+  nav ul{display:flex;gap:1.8rem;list-style:none}
+  nav ul a{color:var(--muted);font-size:.95rem;position:relative;padding:.3rem 0;transition:color .3s}
+  nav ul a::after{content:"";position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s}
+  nav ul a:hover,nav ul a.active{color:var(--text)}
+  nav ul a:hover::after,nav ul a.active::after{width:100%}
+  .burger{display:none;color:var(--text);font-size:1.6rem;cursor:pointer;background:none;border:none}
+
+  /* ===== HERO ===== */
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1.5rem 3rem;position:relative;z-index:2}
+  .hero-content{opacity:0;animation:fadeUp 1s .5s forwards}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+  .hero img{width:160px;height:160px;border-radius:50%;border:4px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,linear-gradient(135deg,var(--accent),var(--accent2)) border-box;object-fit:cover;margin-bottom:1.4rem;animation:float 4s ease-in-out infinite;box-shadow:0 0 60px rgba(56,189,248,.25)}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .hero h1{font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:.6rem}
+  .hero h1 .gradient{background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent));background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradientMove 4s linear infinite}
+  @keyframes gradientMove{to{background-position:200%}}
+  .typed-wrap{font-size:1.25rem;color:var(--accent);min-height:1.8em;font-weight:600;margin-bottom:1rem}
+  .cursor-blink{display:inline-block;width:2px;height:1.2em;background:var(--accent);margin-left:3px;animation:blink .8s step-end infinite;vertical-align:text-bottom}
+  @keyframes blink{50%{opacity:0}}
+  .hero p{color:var(--muted);max-width:620px;margin:0 auto 2rem}
+  .btn{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0a0e1a;font-weight:700;padding:.85rem 2rem;border-radius:50px;margin:.3rem;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+  .btn::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .5s}
+  .btn:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(56,189,248,.35)}
+  .btn:hover::before{left:100%}
+  .btn.ghost{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+  .btn.ghost:hover{color:#0a0e1a;background:var(--accent)}
+  .scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.8rem;letter-spacing:3px;animation:bounceHint 2s infinite}
+  @keyframes bounceHint{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+  /* ===== SECTIONS ===== */
+  section{max-width:1100px;margin:auto;padding:6rem 1.5rem;position:relative;z-index:2}
+  .section-title{text-align:center;font-size:2.2rem;margin-bottom:.5rem}
+  .section-title span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .section-sub{text-align:center;color:var(--muted);margin-bottom:3rem}
+  .divider{width:70px;height:4px;margin:1rem auto 0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:50px}
+
+  /* Reveal on scroll */
+  .reveal{opacity:0;transform:translateY(50px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-left{transform:translateX(-60px)}
+  .reveal-right{transform:translateX(60px)}
+  .reveal-left.visible,.reveal-right.visible{transform:translateX(0)}
+  .reveal-scale{transform:scale(.85)}
+  .reveal-scale.visible{transform:scale(1)}
+
+  /* About */
+  .about{display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:center}
+  .about-card{background:var(--card);border:1px solid rgba(56,189,248,.15);border-radius:var(--radius);padding:2rem;text-align:center;transition:transform .35s,box-shadow .35s,border-color .35s}
+  .about-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(56,189,248,.15);border-color:var(--accent)}
+  .info-list{list-style:none;text-align:left;margin-top:1.2rem;font-size:.95rem}
+  .info-list li{padding:.4rem 0;border-bottom:1px dashed #26334d}
+  .info-list li strong{color:var(--muted);display:inline-block;width:110px}
+  .stats{display:flex;gap:2rem;margin-top:1.5rem;flex-wrap:wrap}
+  .stat h3{color:var(--accent);font-size:2rem}
+  .highlights{list-style:none;margin-top:1.2rem}
+  .highlights li{padding:.5rem 0;color:var(--muted);display:flex;gap:.6rem}
+  .highlights li::before{content:"✔";color:var(--accent);font-weight:700}
+
+  /* Skills */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+  .skill-card{background:var(--card);border:1px solid rgba(56,189,248,.15);border-radius:var(--radius);padding:1.6rem;transition:transform .35s,border-color .35s,box-shadow .35s;transform-style:preserve-3d;perspective:800px}
+  .skill-card:hover{transform:translateY(-8px);border-color:var(--accent);box-shadow:0 20px 50px rgba(56,189,248,.15)}
+  .skill-card h3{color:var(--accent);margin-bottom:1.2rem;font-size:1.05rem}
+  .bar{margin-bottom:1.1rem}
+  .bar p{display:flex;justify-content:space-between;font-size:.9rem;color:var(--muted);margin-bottom:.35rem}
+  .bar .track{height:8px;background:#1f2b44;border-radius:50px;overflow:hidden}
+  .bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:50px;width:0;transition:width 1.4s cubic-bezier(.2,.8,.3,1);position:relative}
+  .bar .fill::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:shimmer 2s infinite}
+  @keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+  /* Portfolio */
+  .filter{text-align:center;margin-bottom:2.2rem}
+  .filter button{background:transparent;border:1px solid #26334d;color:var(--muted);padding:.55rem 1.4rem;border-radius:50px;margin:.25rem;cursor:pointer;font-size:.9rem;transition:.3s}
+  .filter button.active,.filter button:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 20px rgba(56,189,248,.2)}
+  .works{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;position:relative}
+  .work{background:var(--card);border:1px solid rgba(56,189,248,.15);border-radius:var(--radius);overflow:hidden;transition:opacity .4s,transform .4s,border-color .3s,box-shadow .3s;opacity:1;transform:scale(1)}
+  .work.hide-card{opacity:0;transform:scale(.8);pointer-events:none;position:absolute;visibility:hidden}
+  .work:hover{border-color:var(--accent);box-shadow:0 20px 50px rgba(56,189,248,.2)}
+  .work .thumb{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;background:linear-gradient(135deg,#0ea5e9,#6366f1);position:relative;overflow:hidden}
+  .work .thumb::after{content:"Voir le projet →";position:absolute;inset:0;background:rgba(10,14,26,.85);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1rem;font-weight:700;opacity:0;transition:opacity .35s}
+  .work:hover .thumb::after{opacity:1}
+  .work:hover .thumb span{transform:scale(1.2) rotate(-8deg)}
+  .work .thumb span{transition:transform .4s;display:inline-block}
+  .work .body{padding:1.3rem}
+  .work h3{margin-bottom:.4rem}
+  .work p{color:var(--muted);font-size:.9rem;margin-bottom:.9rem}
+  .tags{display:flex;gap:.4rem;flex-wrap:wrap}
+  .tags span{font-size:.75rem;background:rgba(56,189,248,.12);color:var(--accent);padding:.2rem .7rem;border-radius:50px;transition:.3s}
+  .work:hover .tags span{background:rgba(56,189,248,.25)}
+
+  /* Contact */
+  .contact-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem}
+  .contact-info{background:var(--card);border:1px solid rgba(56,189,248,.15);border-radius:var(--radius);padding:2rem;transition:transform .35s,border-color .35s}
+  .contact-info:hover{transform:translateY(-6px);border-color:var(--accent)}
+  .contact-info h3{margin-bottom:1.2rem;color:var(--accent)}
+  .contact-info p{margin-bottom:1rem;color:var(--muted);display:flex;gap:.7rem;align-items:center;transition:.3s;cursor:default}
+  .contact-info p:hover{color:var(--text);transform:translateX(6px)}
+  form{display:grid;gap:1rem}
+  form input,form textarea{background:var(--card);border:1px solid #26334d;border-radius:12px;padding:.95rem 1.1rem;color:var(--text);font-size:.95rem;width:100%;font-family:inherit;transition:border-color .3s,box-shadow .3s}
+  form input:focus,form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,.15)}
+  form button{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:#0a0e1a;font-weight:700;padding:.95rem;border-radius:12px;cursor:pointer;font-size:1rem;transition:transform .25s,box-shadow .25s}
+  form button:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(56,189,248,.35)}
+
+  /* Back to top */
+  #toTop{position:fixed;bottom:2rem;right:2rem;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:#0a0e1a;font-size:1.3rem;cursor:pointer;z-index:200;opacity:0;visibility:hidden;transform:translateY(20px);transition:.35s;box-shadow:0 8px 25px rgba(56,189,248,.35)}
+  #toTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+  #toTop:hover{transform:translateY(-4px)}
+
+  footer{text-align:center;padding:2.2rem;color:var(--muted);border-top:1px solid #1c2740;font-size:.9rem;position:relative;z-index:2}
+
+  @media (max-width:820px){
+    .burger{display:block}
+    nav ul{position:fixed;top:60px;right:-100%;flex-direction:column;background:var(--bg2);width:70%;height:100vh;padding:2rem;transition:right .35s}
+    nav ul.open{right:0}
+    .about,.contact-wrap{grid-template-columns:1fr}
+    #cursor-glow{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="loader-ring"></div>
+  <p>CHARGEMENT...</p>
+</div>
+
+<div id="progress"></div>
+<div id="cursor-glow"></div>
+<canvas id="particles"></canvas>
+
+<header id="header">
+  <nav>
+    <div class="logo">Hammami<span> Nizar</span></div>
+    <ul id="menu">
+      <li><a href="#accueil" class="active">Accueil</a></li>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="burger" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </nav>
+</header>
+
+<!-- PROFIL -->
+<section class="hero" id="accueil">
+  <div class="hero-content">
+    <img src="6.png" alt="Photo de profil">
+    <h1>Bonjour, je suis <span class="gradient">Hammami Nizar</span></h1>
+    <div class="typed-wrap"><span id="typed"></span><span class="cursor-blink"></span></div>
+    <p>Spécialiste en Support Informatique et Infrastructure Réseaux. Je conçois, déploie et sécurise des infrastructures IT fiables, tout en développant des outils sur mesure qui simplifient le travail des entreprises.</p>
+    <a class="btn" href="#portfolio">Voir mes projets</a>
+    <a class="btn ghost" href="#contact">Me contacter</a>
+  </div>
+  <div class="scroll-hint">▼ DÉFILER</div>
+</section>
+
+<!-- À PROPOS -->
+<section id="apropos">
+  <h2 class="section-title reveal">À <span>propos</span></h2>
+  <p class="section-sub reveal">Qui suis-je ?</p>
+  <div class="divider reveal"></div>
+  <div class="about" style="margin-top:3rem">
+    <div class="about-card reveal reveal-left">
+      <img src="profil.png" alt="Photo" style="width:152px;height:195,5px;border-radius:10%;border:2px solid var(--accent)">
+      <h3 style="margin-top:1rem">Hammami Nizar</h3>
+      <p style="color:var(--muted);font-size:.9rem">Support Technique - Sécurité IT   Maintenance</p>
+      <ul class="info-list">
+        <li><strong>Profil :</strong> Tech. Supérieur</li>
+        <li><strong>Domaine :</strong> Réseaux &amp; Télécoms</li>
+        <li><strong>Email :</strong> contact@email.com</li>
+         <li><strong>Âge :</strong> 25 ans</li>
+        <li><strong>Ville :</strong> Ben Arous, Tunis</li>
+        <li><strong>Langues :</strong> AR / FR / EN</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-right">
+      <h3>+2 ans d'expérience en infrastructures IT &amp; support technique</h3>
+      <p style="color:var(--muted);margin:1rem 0">Technicien Supérieur en Réseaux Informatiques et Télécommunications, j'accompagne les entreprises dans l'installation, la maintenance et la sécurisation de leurs systèmes d'information : du câblage réseau au déploiement FTTH, en passant par la vidéosurveillance et le contrôle d'accès.</p>
+      <p style="color:var(--muted)">Passionné par l'optimisation des processus, je développe également des applications sur mesure qui font gagner un temps précieux aux équipes — jusqu'à <strong style="color:var(--accent)">+90% de gain de temps</strong> sur certains processus.</p>
+      <div class="stats">
+        <div class="stat"><h3 class="counter" data-target="200">0</h3><p style="color:var(--muted)">Entreprises gérées</p></div>
+        <div class="stat"><h3><span class="counter" data-target="90">0</span>%</h3><p style="color:var(--muted)">Gain de temps max</p></div>
+        <div class="stat"><h3>+<span class="counter" data-target="2">0</span></h3><p style="color:var(--muted)">Ans d'expérience</p></div>
+      </div>
+      <ul class="highlights">
+        <li>Expertise en gestion de parc informatique, dépannage matériel/logiciel et sécurité informatique</li>
+        <li>Automatisation : développement d'outils comptables sur mesure</li>
+        <li>Relation client : résolution proactive et taux de satisfaction élevé</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences">
+  <h2 class="section-title reveal">Mes <span>compétences</span></h2>
+  <p class="section-sub reveal">Réseaux, systèmes, sécurité &amp; développement</p>
+  <div class="divider reveal"></div>
+  <div class="skills-grid" style="margin-top:3rem">
+    <div class="skill-card reveal reveal-left">
+      <h3>💻 Maintenance Informatique</h3>
+      <div class="bar"><p>Diagnostic &amp; réparation PC <span>95%</span></p><div class="track"><div class="fill" data-w="95"></div></div></div>
+      <div class="bar"><p>Serveurs &amp; imprimantes <span>90%</span></p><div class="track"><div class="fill" data-w="90"></div></div></div>
+      <div class="bar"><p>Dépannage matériel/logiciel <span>95%</span></p><div class="track"><div class="fill" data-w="95"></div></div></div>
+    </div>
+    <div class="skill-card reveal reveal-scale">
+      <h3>🌐 Réseaux &amp; Télécoms</h3>
+      <div class="bar"><p>Câblage LAN / VLAN <span>90%</span></p><div class="track"><div class="fill" data-w="90"></div></div></div>
+      <div class="bar"><p>Réseaux WAN <span>80%</span></p><div class="track"><div class="fill" data-w="80"></div></div></div>
+      <div class="bar"><p>Déploiement FTTH <span>85%</span></p><div class="track"><div class="fill" data-w="85"></div></div></div>
+    </div>
+    <div class="skill-card reveal reveal-right">
+      <h3>🔒 Sécurité des Systèmes</h3>
+      <div class="bar"><p>Vidéosurveillance <span>90%</span></p><div class="track"><div class="fill" data-w="90"></div></div></div>
+      <div class="bar"><p>Systèmes d'alarme <span>85%</span></p><div class="track"><div class="fill" data-w="85"></div></div></div>
+      <div class="bar"><p>Contrôle d'accès <span>85%</span></p><div class="track"><div class="fill" data-w="85"></div></div></div>
+    </div>
+    <div class="skill-card reveal reveal-left">
+      <h3>📊 Support &amp; Gestion de Projets</h3>
+      <div class="bar"><p>Support technique &amp; formation <span>95%</span></p><div class="track"><div class="fill" data-w="95"></div></div></div>
+      <div class="bar"><p>Coordination client / projets <span>85%</span></p><div class="track"><div class="fill" data-w="85"></div></div></div>
+      <div class="bar"><p>Résolution proactive <span>90%</span></p><div class="track"><div class="fill" data-w="90"></div></div></div>
+    </div>
+    <div class="skill-card reveal reveal-scale">
+      <h3>📈 Automatisation &amp; Outils</h3>
+      <div class="bar"><p>Outils comptables sur mesure <span>80%</span></p><div class="track"><div class="fill" data-w="80"></div></div></div>
+      <div class="bar"><p>Applications internes <span>85%</span></p><div class="track"><div class="fill" data-w="85"></div></div></div>
+      <div class="bar"><p>Optimisation de processus <span>90%</span></p><div class="track"><div class="fill" data-w="90"></div></div></div>
+    </div>
+    <div class="skill-card reveal reveal-right">
+      <h3>🖥️ Systèmes &amp; Environnements</h3>
+      <div class="bar"><p>Windows / Windows Server <span>90%</span></p><div class="track"><div class="fill" data-w="90"></div></div></div>
+      <div class="bar"><p>Gestion de parc (400+ postes) <span>92%</span></p><div class="track"><div class="fill" data-w="92"></div></div></div>
+      <div class="bar"><p>Sécurité informatique <span>85%</span></p><div class="track"><div class="fill" data-w="85"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <h2 class="section-title reveal">Mon <span>portfolio</span></h2>
+  <p class="section-sub reveal">Projets d'infrastructure, sécurité et automatisation</p>
+  <div class="divider reveal"></div>
+  <div class="filter reveal" style="margin-top:2.5rem">
+    <button class="active" data-f="all">Tous</button>
+    <button data-f="reseau">Réseaux</button>
+    <button data-f="securite">Sécurité</button>
+    <button data-f="autom">Automatisation</button>
+    <button data-f="support">Support &amp; Parc</button>
+  </div>
+  <div class="works" id="works" style="margin-top:1rem">
+    <div class="work reveal" data-cat="reseau">
+      <div class="thumb"><span>🔌</span></div>
+      <div class="body"><h3>Câblage LAN &amp; VLAN entreprise</h3><p>Conception et déploiement complet d'une infrastructure réseau segmentée pour une structure de 80 postes.</p><div class="tags"><span>LAN</span><span>VLAN</span><span>Switching</span></div></div>
+    </div>
+    <div class="work reveal" data-cat="reseau">
+      <div class="thumb"><span>📡</span></div>
+      <div class="body"><h3>Déploiement FTTH</h3><p>Installation et raccordement fibre optique pour des clients professionnels, du coffret à la configuration.</p><div class="tags"><span>FTTH</span><span>Fibre optique</span><span>WAN</span></div></div>
+    </div>
+    <div class="work reveal" data-cat="securite">
+      <img src="camera.png" alt="camera Dahua" style="width: 100%; height: 150px; object-fit: cover;">
+      <div class="body"><h3>Système De Vidéosurveillance</h3><p>Étude du site, choix et positionnement des caméras, planification du cheminement des câbles, raccordement et mise en service.</p><div class="tags"><span>Hikvision</span><span>Dahua</span><span>UNV</span></div></div>
+    </div>
+    <div class="work reveal" data-cat="securite">
+      <img src="alarme.png" alt="Alarme Schutz" style="width: 100%; height: 150px; object-fit: cover;">
+      <div class="body"><h3>Système d'Alarme</h3><p>Installation et contrôle de la centrale, sirène, détecteurs PIR et contacts magnétiques. Vérification du câblage et du choix filaire/sans fil.</p><div class="tags"><span>Focus</span><span>Schutz</span></div></div>
+    </div>
+    <div class="work reveal" data-cat="autom">
+      <img src="Automatisation-comptable.png" alt="Automatisation et Traitement Comptable" style="width: 100%; height: 150px; object-fit: cover;">
+      <div class="body"><h3>Outil comptable sur mesure</h3><p>Extraction automatique de données depuis des factures PDF et génération de tableaux de bord structurés.</p><div class="tags"><span>Power Automate</span><span>Python</span></div></div>
+    </div>
+    <div class="work reveal" data-cat="support">
+      <img src="11.png" alt="Projet IT" style="width: 100%; height: 150px; object-fit: cover;">
+      <div class="body"><h3>Gestion de parc informatique</h3><p>Maintenance, installation et suivi des équipements informatiques afin d’assurer le bon fonctionnement des systèmes et la continuité des activités.</p><div class="tags"><span>Windows</span><span>Office 365</span><span>Anydesk</span></div></div>
+    </div>
+    <div class="work reveal" data-cat="support">
+      <div class="thumb"><span>🎓</span></div>
+      <div class="body"><h3>Formation des utilisateurs</h3><p>Sessions de formation et accompagnement des équipes pour une adoption rapide des nouveaux outils.</p><div class="tags"><span>Formation</span><span>Relation client</span></div></div>
+    </div>
+    <div class="work reveal" data-cat="autom">
+      <img src="SmartManger.png" alt="Interface Smart Repair Manager" style="width: 100%; height: 150px; object-fit: cover;">
+      <div class="body"><h3>Optimisation des processus internes</h3><p>Développement de solution sur mesure, gestion centralisée des workflows, suivi des interventions et synchronisation des stocks en temps réel.</p><div class="tags"><span>Boot AI</span><span>Low Code Script</span><span>Sheet</span></div></div>
+    </div>
+    <div class="work reveal" data-cat="reseau">
+      <div class="thumb"><span>🌐</span></div>
+      <div class="body"><h3>Mise à niveau infrastructure WAN</h3><p>Coordination avec le client pour la modernisation du réseau inter-sites : planification, migration, tests.</p><div class="tags"><span>WAN</span><span>Projet</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title reveal">Me <span>contacter</span></h2>
+  <p class="section-sub reveal">Un projet d'installation, de sécurité ou d'automatisation ? Parlons-en !</p>
+  <div class="divider reveal"></div>
+  <div class="contact-wrap reveal" style="margin-top:3rem">
+    <div class="contact-info">
+      <h3>Informations</h3>
+      <p>📧 <a href="mailto:nizarhammami987@gmail.com" class="contact-link" target="_blank">nizarhammami987@gmail.com</a></p>
+      <p>📱 <a href="tel:+21625803663" class="contact-link">+216 25 803 663</a></p>
+      <p>📍 <a href="https://www.google.com/maps/search/?api=1&query=Hammam+chatt,+Hammam+Lif" class="contact-link" target="_blank">Hammam chatt, Ben Arous</a></p>
+      <p>💼 <a href="#">LinkedIn</a></p>
+      <p>💼 <a href="#">GitHub</a></p>
+    </div>
+<form action="https://formsubmit.co/nizarhammami987@gmail.com" method="POST">
+  <input type="text" name="nom" placeholder="Votre nom" required>
+  <input type="email" name="email" placeholder="Votre email" required>
+  <input type="text" name="sujet" placeholder="Sujet (installation, support, projet...)">
+  <textarea name="message" rows="5" placeholder="Décrivez votre besoin" required></textarea>
+  <button type="submit">Envoyer le message ✈️</button>
+</form>
+  </div>
+  
+</section>
+
+<button id="toTop" title="Retour en haut">↑</button>
+
+<footer>© Il interdit aux tiers de copier, diffuser ou vendre l'œuvre sans l'accord du propriétaire. Tous droits réservés.</footer>
+
+<script>
+/* ========== PRELOADER ========== */
+window.addEventListener('load',()=>{
+  setTimeout(()=>document.getElementById('preloader').classList.add('hidden'),600);
+});
+
+/* ========== PARTICLES ========== */
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
+let W,H,parts=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+resize();addEventListener('resize',resize);
+const N=innerWidth<820?40:80;
+for(let i=0;i<N;i++)parts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*2+0.5});
+function drawParticles(){
+  ctx.clearRect(0,0,W,H);
+  parts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;
+    if(p.y<0||p.y>H)p.vy*=-1;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(56,189,248,.5)';ctx.fill();
+  });
+  for(let i=0;i<parts.length;i++)for(let j=i+1;j<parts.length;j++){
+    const dx=parts[i].x-parts[j].x,dy=parts[i].y-parts[j].y,d=Math.hypot(dx,dy);
+    if(d<120){ctx.beginPath();ctx.moveTo(parts[i].x,parts[i].y);ctx.lineTo(parts[j].x,parts[j].y);
+    ctx.strokeStyle=`rgba(129,140,248,${(1-d/120)*.18})`;ctx.stroke();}
+  }
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+/* ========== CURSOR GLOW ========== */
+const glow=document.getElementById('cursor-glow');
+addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+
+/* ========== SCROLL PROGRESS + HEADER + TO TOP ========== */
+const progress=document.getElementById('progress'),header=document.getElementById('header'),toTop=document.getElementById('toTop');
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  progress.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  header.classList.toggle('scrolled',h.scrollTop>50);
+  toTop.classList.toggle('show',h.scrollTop>500);
+});
+toTop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+/* ========== TYPED EFFECT ========== */
+const phrases=["Technicien Supérieur Réseaux & Télécoms","Expert Infrastructures IT","Spécialiste Sécurité & Vidéosurveillance","Développeur d'outils sur mesure","Support Technique & Formation"];
+const typedEl=document.getElementById('typed');
+let pi=0,ci=0,deleting=false;
+function type(){
+  const cur=phrases[pi];
+  typedEl.textContent=cur.slice(0,ci);
+  if(!deleting&&ci<cur.length){ci++;setTimeout(type,65)}
+  else if(!deleting){deleting=true;setTimeout(type,2000)}
+  else if(ci>0){ci--;setTimeout(type,30)}
+  else{deleting=false;pi=(pi+1)%phrases.length;setTimeout(type,400)}
+}
+type();
+
+/* ========== REVEAL + COMPTEURS + BARRES ========== */
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.fill').forEach((f,i)=>setTimeout(()=>f.style.width=f.dataset.w+'%',i*150));
+      e.target.querySelectorAll('.counter').forEach(c=>{
+        if(c.dataset.done)return;c.dataset.done=1;
+        const target=+c.dataset.target;let n=0;
+        const step=Math.max(1,Math.ceil(target/60));
+        const t=setInterval(()=>{n+=step;if(n>=target){n=target;clearInterval(t)}c.textContent=n},25);
+      });
+      revealObs.unobserve(e.target);
+    }
+  });
+},{threshold:.15});
+document.querySelectorAll('.reveal,.skills-grid,.stats').forEach(el=>revealObs.observe(el));
+
+/* ========== SCROLLSPY ========== */
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('nav ul a');
+const spy=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+sections.forEach(s=>spy.observe(s));
+
+/* ========== FILTRE PORTFOLIO ========== */
+const fbuttons=document.querySelectorAll('.filter button');
+fbuttons.forEach(btn=>btn.addEventListener('click',()=>{
+  fbuttons.forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const f=btn.dataset.f;
+  document.querySelectorAll('.work').forEach(w=>{
+    const show=f==='all'||w.dataset.cat===f;
+    if(show){w.style.position='';w.style.visibility='';w.classList.remove('hide-card');}
+    else{w.classList.add('hide-card');}
+  });
+}));
+
+/* ========== TILT 3D ========== */
+document.querySelectorAll('.work').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(800px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-6px)`;
+  });
+  card.addEventListener('mouseleave',()=>card.style.transform='');
+});
+
+/* ========== MENU MOBILE ========== */
+document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('menu').classList.remove('open');
+}));
+
+
+/* ========== envoyer mail ========== */    
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const form = this;
+    const btn = form.querySelector('button');
+
+    fetch('send_mail.php', {
+      method: 'POST',
+      body: new FormData(form)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        btn.textContent = 'Message envoyé ✓';
+        form.reset();
+      } else {
+        btn.textContent = 'Erreur d\'envoi ❌';
+      }
+      setTimeout(() => btn.textContent = 'Envoyer le message ✈️', 2500);
+    })
+    .catch(() => {
+      btn.textContent = 'Erreur d\'envoi ❌';
+      setTimeout(() => btn.textContent = 'Envoyer le message ✈️', 2500);
+    });
+  });
+
+</script>
+</body>
+</html>
